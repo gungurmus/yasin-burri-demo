@@ -27,7 +27,7 @@ function App() {
   /*-------------------------------------------------------------------------*/
 
   const getEmployees = () => {
-    Axios.get("http://yasin-burri-demo.herokuapp.com/api/getdata").then(
+    Axios.get("https://yasin-burri-demo.herokuapp.com/api/getdata").then(
       (response) => {
         setEmployeeList(response.data);
       }
@@ -36,7 +36,7 @@ function App() {
 
   const sortEmployees = (tempsortby) => {
     sortBy = tempsortby;
-    Axios.post("http://yasin-burri-demo.herokuapp.com/api/sortdata", {
+    Axios.post("https://yasin-burri-demo.herokuapp.com/api/sortdata", {
       sortBy: sortBy,
       prevSort: prevSort,
     }).then((response) => {
@@ -46,7 +46,7 @@ function App() {
   };
 
   const searchEmployee = () => {
-    Axios.post("http://yasin-burri-demo.herokuapp.com/api/search", {
+    Axios.post("https://yasin-burri-demo.herokuapp.com/api/search", {
       searchBy: searchBy,
       searchIn: searchIn,
     }).then((response) => {
@@ -55,7 +55,7 @@ function App() {
   };
 
   const filterEmployee = () => {
-    Axios.post("http://yasin-burri-demo.herokuapp.com/api/filter", {
+    Axios.post("https://yasin-burri-demo.herokuapp.com/api/filter", {
       ageFilter: ageFilter,
       ageCriteria: ageCriteria,
     }).then((response) => {
