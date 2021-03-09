@@ -27,11 +27,16 @@ function App() {
   /*-------------------------------------------------------------------------*/
 
   const getEmployees = () => {
-    Axios.get("https://yasin-burri-demo.herokuapp.com/api/getdata").then(
-      (response) => {
-        setEmployeeList(response.data);
-      }
-    );
+    Axios.get("https://yasin-burri-demo.herokuapp.com/api/getdata", {
+      headers: {
+        "Acces-Controll-Allow-Origin": "*",
+        "Access-Control-Allow-Methods":
+          "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+      },
+    }).then((response) => {
+      setEmployeeList(response.data);
+    });
   };
 
   const sortEmployees = (tempsortby) => {
@@ -39,6 +44,12 @@ function App() {
     Axios.post("https://yasin-burri-demo.herokuapp.com/api/sortdata", {
       sortBy: sortBy,
       prevSort: prevSort,
+      headers: {
+        "Acces-Controll-Allow-Origin": "*",
+        "Access-Control-Allow-Methods":
+          "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+      },
     }).then((response) => {
       setPrevSort(sortBy);
       setEmployeeList(response.data);
@@ -49,6 +60,12 @@ function App() {
     Axios.post("https://yasin-burri-demo.herokuapp.com/api/search", {
       searchBy: searchBy,
       searchIn: searchIn,
+      headers: {
+        "Acces-Controll-Allow-Origin": "*",
+        "Access-Control-Allow-Methods":
+          "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+      },
     }).then((response) => {
       setEmployeeList(response.data);
     });
@@ -58,6 +75,12 @@ function App() {
     Axios.post("https://yasin-burri-demo.herokuapp.com/api/filter", {
       ageFilter: ageFilter,
       ageCriteria: ageCriteria,
+      headers: {
+        "Acces-Controll-Allow-Origin": "*",
+        "Access-Control-Allow-Methods":
+          "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+      },
     }).then((response) => {
       setEmployeeList(response.data);
     });
@@ -135,12 +158,12 @@ function App() {
           <table>
             <tbody>
               <tr>
-                <td class="input-container">
+                <td>
                   <label className={"input-container-item"}>
                     In der Tabelle suchen
                   </label>
                 </td>
-                <td class="tg-0pky">
+                <td>
                   <input
                     className={"input-container-item"}
                     type="text"
@@ -152,12 +175,12 @@ function App() {
                 </td>
               </tr>
               <tr>
-                <td class="tg-0lax">
+                <td>
                   <label className={"input-container-item"}>
                     In der Spalte..
                   </label>
                 </td>
-                <td class="tg-0lax">
+                <td>
                   <select
                     className={"input-container-item"}
                     onChange={(e) => {
@@ -173,17 +196,17 @@ function App() {
                 </td>
               </tr>
               <tr>
-                <td class="tg-0lax"></td>
-                <td class="tg-0lax">
+                <td></td>
+                <td>
                   {" "}
                   <button onClick={searchEmployee}>Suche starten!</button>
                 </td>
               </tr>
               <tr>
-                <td class="tg-0lax">
+                <td>
                   <label>Geben Sie ein Alter ein</label>
                 </td>
-                <td class="tg-0lax">
+                <td>
                   <input
                     className={"input-container-item"}
                     type="number"
@@ -194,12 +217,12 @@ function App() {
                 </td>
               </tr>
               <tr>
-                <td class="tg-0lax">
+                <td>
                   <label className={"input-container-item"}>
                     Das Alter der anderen sollte...
                   </label>
                 </td>
-                <td class="tg-0lax">
+                <td>
                   <select
                     className={"input-container-item"}
                     onChange={(e) => {
@@ -212,8 +235,8 @@ function App() {
                 </td>
               </tr>
               <tr>
-                <td class="tg-0lax"></td>
-                <td class="tg-0lax">
+                <td></td>
+                <td>
                   <button onClick={filterEmployee}>Filtern!</button>
                 </td>
               </tr>
