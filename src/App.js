@@ -27,16 +27,11 @@ function App() {
   /*-------------------------------------------------------------------------*/
 
   const getEmployees = () => {
-    Axios.get("https://yasin-burri-demo.herokuapp.com/api/getdata", {
-      headers: {
-        "Acces-Controll-Allow-Origin": "*",
-        "Access-Control-Allow-Methods":
-          "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-      },
-    }).then((response) => {
-      setEmployeeList(response.data);
-    });
+    Axios.get("https://yasin-burri-demo.herokuapp.com/api/getdata", {}).then(
+      (response) => {
+        setEmployeeList(response.data);
+      }
+    );
   };
 
   const sortEmployees = (tempsortby) => {
@@ -44,12 +39,6 @@ function App() {
     Axios.post("https://yasin-burri-demo.herokuapp.com/api/sortdata", {
       sortBy: sortBy,
       prevSort: prevSort,
-      headers: {
-        "Acces-Controll-Allow-Origin": "*",
-        "Access-Control-Allow-Methods":
-          "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-      },
     }).then((response) => {
       setPrevSort(sortBy);
       setEmployeeList(response.data);
@@ -60,12 +49,6 @@ function App() {
     Axios.post("https://yasin-burri-demo.herokuapp.com/api/search", {
       searchBy: searchBy,
       searchIn: searchIn,
-      headers: {
-        "Acces-Controll-Allow-Origin": "*",
-        "Access-Control-Allow-Methods":
-          "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-      },
     }).then((response) => {
       setEmployeeList(response.data);
     });
@@ -75,12 +58,6 @@ function App() {
     Axios.post("https://yasin-burri-demo.herokuapp.com/api/filter", {
       ageFilter: ageFilter,
       ageCriteria: ageCriteria,
-      headers: {
-        "Acces-Controll-Allow-Origin": "*",
-        "Access-Control-Allow-Methods":
-          "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-      },
     }).then((response) => {
       setEmployeeList(response.data);
     });
