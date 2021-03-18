@@ -44,21 +44,15 @@ function App() {
         ...prevState,
         [sortByValue]: false,
       }));
-      console.log(employeeList);
-      employeeList.sort(
-        (a, b) => {
-          return a[sortBy] > b[sortBy] ? -1 : 1;
-        },
-        console.log(employeeList),
-        setEmployeeList(employeeList)
-      );
+      employeeList.sort((a, b) => {
+        return a[sortBy] > b[sortBy] ? -1 : 1;
+      }, setEmployeeList(employeeList));
     } else {
       setIsAscending((prevState) => ({
         ...prevState,
         [sortByValue]: true,
       }));
       employeeList.sort((a, b) => {
-        console.log(a, b, sortBy);
         return a[sortBy] > b[sortBy] ? 1 : -1;
       }, setEmployeeList(employeeList));
     }
