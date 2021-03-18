@@ -10,13 +10,18 @@ function App() {
   // ihren Manipulations-Methoden erfolgt hier
   /*-------------------------------------------------------------------------*/
   const [employeeList, setEmployeeList] = useState([]);
-  const [prevSort, setPrevSort] = useState("");
+  const [isAscending, setIsAscending] = useState({
+    employeeid: true,
+    name: false,
+    age: false,
+    birthday: false,
+    adress: false,
+    zip: false,
+  });
   const [searchBy, setSearchBy] = useState("");
   const [searchIn, setSearchIn] = useState("");
   const [ageFilter, setAgeFilter] = useState(0);
   const [ageCriteria, setAgeCriteria] = useState("");
-
-  let sortBy = "";
 
   // Alle Funktionen die ins Backend kommunizieren und
   // die notwendingen POST/GET-Requests ausführen via Axios.
@@ -27,22 +32,36 @@ function App() {
   /*-------------------------------------------------------------------------*/
 
   const getEmployees = () => {
-    Axios.get("https://yasin-burri-demo.herokuapp.com/api/getdata", {}).then(
-      (response) => {
-        setEmployeeList(response.data);
-      }
-    );
-  };
-
-  const sortEmployees = (tempsortby) => {
-    sortBy = tempsortby;
-    Axios.post("https://yasin-burri-demo.herokuapp.com/api/sortdata", {
-      sortBy: sortBy,
-      prevSort: prevSort,
-    }).then((response) => {
-      setPrevSort(sortBy);
+    Axios.get("http://localhost:80/api/getdata", {}).then((response) => {
       setEmployeeList(response.data);
     });
+  };
+
+  const sortEmployees = (sortBy) => {
+    const sortByValue = sortBy;
+    if (isAscending[sortByValue]) {
+      setIsAscending((prevState) => ({
+        ...prevState,
+        [sortByValue]: false,
+      }));
+      console.log(employeeList);
+      employeeList.sort(
+        (a, b) => {
+          return a[sortBy] > b[sortBy] ? -1 : 1;
+        },
+        console.log(employeeList),
+        setEmployeeList(employeeList)
+      );
+    } else {
+      setIsAscending((prevState) => ({
+        ...prevState,
+        [sortByValue]: true,
+      }));
+      employeeList.sort((a, b) => {
+        console.log(a, b, sortBy);
+        return a[sortBy] > b[sortBy] ? 1 : -1;
+      }, setEmployeeList(employeeList));
+    }
   };
 
   const searchEmployee = () => {
@@ -114,7 +133,7 @@ function App() {
               {employeeList.map((employee, key) => {
                 //Das Array employeeList wird gemappt und für jedes Element wird ein Table-Data erstellt
                 return (
-                  <tr>
+                  <tr key={key}>
                     <td>{employee.employeeid}</td>
                     <td>{employee.name}</td>
                     <td>{employee.age}</td>
