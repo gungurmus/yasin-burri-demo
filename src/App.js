@@ -32,9 +32,11 @@ function App() {
   /*-------------------------------------------------------------------------*/
 
   const getEmployees = () => {
-    Axios.get("http://localhost:80/api/getdata", {}).then((response) => {
-      setEmployeeList(response.data);
-    });
+    Axios.get("https://yasin-burri-demo.herokuapp.com/api/getdata", {}).then(
+      (response) => {
+        setEmployeeList(response.data);
+      }
+    );
   };
 
   const sortEmployees = (sortBy) => {
